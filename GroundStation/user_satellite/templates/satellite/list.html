@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{{ username }}
+
+{% for sat in satellites %}
+    <table class="t">
+        <tr>
+            <th>
+                <td>NORADID: {{sat.norad_id}}</td>
+            </th>
+        </tr>
+        <tr> 
+            <td>frequency: {{ sat.frequency }}</td>
+        </tr>
+        <tr>
+            <!-- <td>Start: {{ task.date_start }}</td>
+        </tr>
+        <tr>
+            <td>End: {{ task.date_end }}</td>
+        </tr>
+        <tr>
+            <td>Description: {{ task.description }}</td>
+        </tr> -->
+    </table>
+{% endfor %}
+
+ {% endblock %}
