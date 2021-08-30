@@ -24,6 +24,9 @@ class Satellite(models.Model):
     status = models.CharField(max_length=250 ,default="active", choices=[('on', "active"),('off', "dead")])
     registered = models.DateField(auto_now=True)
 
+    def getNorad(self):
+        return self.norad_id
+
 class User_satellite(models.Model):
     users_id=models.ForeignKey(User, on_delete=models.CASCADE)
     satellite_id=models.ForeignKey(Satellite, on_delete=models.CASCADE)

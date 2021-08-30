@@ -1,9 +1,9 @@
 from django.forms.forms import Form
 from django import forms
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.forms import ModelForm
-from .models import User, Satellite
+from .models import User, Satellite, User_satellite
 from django.urls import reverse_lazy
 import datetime
 from utls.salt import create_salt
@@ -74,10 +74,14 @@ def add(request):
     form = AddSatellite(request.POST or None)
     if form.is_valid():
         form.save()
+        sat = Satellite.objects.get(norad_id=form.data['norad_id'])
+        user_satellite = User_satellite(users_id=User.objects.get(id=request.session.get('id')),satellite_id=sat)
+        user_satellite.save()
     context = {
         'form':form, 'username': request.session.get('username')
     }
     return render(request,"satellite/register.html", context)
 
 def list(request):
-    return render(request, 'satellite/list.html', {'username':request.session.get("username"),'satellites': Satellite.objects.all()})
+    user = get_object_or_404(User, id=request.session.get('id'))
+    return render(request, 'satellite/list.html', {'username':request.session.get("username"),'satellites': User_satellite.objects.filter(users_id=user).all()})

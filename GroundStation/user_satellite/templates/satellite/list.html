@@ -7,21 +7,20 @@
     <table class="t">
         <tr>
             <th>
-                <td>NORADID: {{sat.norad_id}}</td>
+                <td>NORADID: {{sat.satellite_id.norad_id}}</td>
             </th>
         </tr>
         <tr> 
-            <td>frequency: {{ sat.frequency }}</td>
+            <td>frequency: {{ sat.satellite_id.frequency }}</td>
         </tr>
         <tr>
-            <!-- <td>Start: {{ task.date_start }}</td>
+            <th>
+                <td>Protocol: {{sat.satellite_id.protocol}}</td>
+            </th>
         </tr>
-        <tr>
-            <td>End: {{ task.date_end }}</td>
+        <tr> 
+            <td>status: {{ sat.satellite_id.status }}</td>
         </tr>
-        <tr>
-            <td>Description: {{ task.description }}</td>
-        </tr> -->
     </table>
 {% endfor %}
 
