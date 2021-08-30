@@ -1,13 +1,15 @@
+import user_satellite
 from django.forms.forms import Form
 from django import forms
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.forms import ModelForm
 from .models import User, Satellite, User_satellite
 from django.urls import reverse_lazy
 import datetime
 from utls.salt import create_salt
 from utls.hash_pass import hash_password
+from utls.decorators import login_required
 
 def index(request):
     return HttpResponse("Hello, world. You're at the satellite - user .")
@@ -57,6 +59,11 @@ def login(request):
     }
     return render(request,"users/login.html", context)
 
+def logout(request):
+    del request.session["username"]
+    del request.session["id"]
+    return redirect("/user_satellite/login")
+
 #=========================================================================
 #                                   Satellite
 class AddSatellite(ModelForm):
@@ -70,6 +77,7 @@ def index(request):
 def satellite(request, norad_id):
     return HttpResponse(f"You are looing at {norad_id}")
 
+@login_required
 def add(request):
     form = AddSatellite(request.POST or None)
     if form.is_valid():
@@ -82,6 +90,7 @@ def add(request):
     }
     return render(request,"satellite/register.html", context)
 
+@login_required
 def list(request):
     user = get_object_or_404(User, id=request.session.get('id'))
     return render(request, 'satellite/list.html', {'username':request.session.get("username"),'satellites': User_satellite.objects.filter(users_id=user).all()})

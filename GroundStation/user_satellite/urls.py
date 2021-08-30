@@ -8,4 +8,5 @@ urlpatterns = [
     path('list',views.list, name="list"),
     path('register/',views.register),
     path('login/',views.login), 
+    path('logout/',views.logout),
 ]
