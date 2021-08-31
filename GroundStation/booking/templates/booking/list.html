@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{{ username }}
+{% for book in bookings %}
+    <table class="t">
+        <tr>
+            <th>
+                <td>Satellite: {{book.satellite_id.norad_id}}</td>
+            </th>
+        </tr>
+        <tr> 
+            <td>begin: {{ book.begin }}</td>
+        </tr>
+        <tr>
+            <th>
+                <td>end: {{ book.end }}</td>
+            </th>
+        </tr>
+        
+    </table>
+{% endfor %}
+
+ {% endblock %}

@@ -6,8 +6,8 @@ from django import forms
 from django.forms import ModelForm, widgets
 from utls.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
-
-
+from django.core import serializers
+from utls.file_manipulation import *
 
 def index(request):
     return HttpResponse("Hello, world. You're at the satellite .")
@@ -26,7 +26,25 @@ def book(request):
         # return HttpResponse(sat.satellite_id)
         book = Booking(user_id=User.objects.get(id=request.session.get('id')),satellite_id=Satellite.objects.get(norad_id=sat.satellite_id) ,begin=form.data["start_time"],end=form.data["end_time"])
         book.save()
+        bookToJson=serializers.serialize("json",Booking.objects.filter(id=book.id).all())
+        # return HttpResponse(bookToJson)
+        fName = f"{book.id}_{sat.satellite_id}"
+        create_file(fName)
+        write_file(fName,bookToJson)
     context = {
         'form':form, 'username': request.session.get('username')
     }
     return render(request,"booking/booking.html", context)
+
+@login_required
+def list(request):
+    user = get_object_or_404(User, id=request.session.get('id'))
+    # return HttpResponse(Booking.objects.filter(user_id=user).all())
+    return render(request, 'booking/list.html', {'username':request.session.get("username"),'bookings': Booking.objects.filter(user_id=user).all()})
+
+@login_required
+def listData(request):
+    user = get_object_or_404(User, id=request.session.get('id'))
+    books = Booking.objects.filter(user_id=user).all()
+    # return HttpResponse(Data.objects.filter(booking_id__in= books).all())
+    return render(request, 'data/list.html', {'username':request.session.get("username"),'datas': Data.objects.filter(booking_id__in= books).all()})

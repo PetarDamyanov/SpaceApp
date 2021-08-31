@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{{ username }}
+{% for data in datas %}
+    <table class="t">
+        <tr>
+            <th>
+                <td>Satellite: {{data.booking_id.satellite_id.norad_id}}</td>
+            </th>
+        </tr>
+        <tr> 
+            <td>begin: {{ data.booking_id.begin }}</td>
+        </tr>
+        <tr>
+            <th>
+                <td>end: {{ data.booking_id.end }}</td>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <td>waterfall: {{ data.waterfall }}</td>
+            </th>
+        </tr><tr>
+            <th>
+                <td>decoded: {{ data.decoded }}</td>
+            </th>
+        </tr><tr>
+            <th>
+                <td>processed: {{ data.processed }}</td>
+            </th>
+        </tr>
+    </table>
+{% endfor %}
+
+ {% endblock %}
