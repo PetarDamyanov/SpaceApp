@@ -9,7 +9,7 @@ class User(models.Model):
     registered = models.DateField(auto_now=True)
     salt = models.CharField(max_length=250)
     def __str__(self):
-        return f'{self.username}, {self.password}, {self.salt}'
+        return f''
     
     def getPass(self):
         return self.password
@@ -26,6 +26,12 @@ class Satellite(models.Model):
 
     def getNorad(self):
         return self.norad_id
+    
+    def __str__(self):
+        return f"{self.norad_id}"
+    
+    def __repr__(self):
+        return f"{self.norad_id}"
 
 class User_satellite(models.Model):
     users_id=models.ForeignKey(User, on_delete=models.CASCADE)
