@@ -21,16 +21,15 @@ def book(request):
 
     form = BookingForm(request.POST or None)
     if form.is_valid():
-        # return HttpResponse(User_satellite.objects.filter(id=form.data['satellite']).get())
         sat=User_satellite.objects.get(id=form.data['satellite'])
-        # return HttpResponse(sat.satellite_id)
         book = Booking(user_id=User.objects.get(id=request.session.get('id')),satellite_id=Satellite.objects.get(norad_id=sat.satellite_id) ,begin=form.data["start_time"],end=form.data["end_time"])
         book.save()
         bookToJson=serializers.serialize("json",Booking.objects.filter(id=book.id).all())
-        # return HttpResponse(bookToJson)
         fName = f"{book.id}_{sat.satellite_id}"
-        create_file(fName)
-        write_file(fName,bookToJson)
+        try:
+            create_file(fName)
+        except FileExistsError:
+            write_file(fName,bookToJson)
     context = {
         'form':form, 'username': request.session.get('username')
     }
