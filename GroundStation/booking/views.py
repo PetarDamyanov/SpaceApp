@@ -63,5 +63,8 @@ def addData(request):
     delete_file(holdFile)
 
 @login_required
-def dataView(request, data_id):
-    return render(request, 'data/data.html', {'username':request.session.get("username"),'data': Data.objects.get(booking_id=data_id)})
+def dataView(request):
+    user = get_object_or_404(User, id=request.session.get('id'))
+    # return HttpResponse(user)
+    books = Booking.objects.filter(user_id=user).first()
+    return render(request, 'data/data.html', {'username':request.session.get("username"),'data': Data.objects.get(booking_id=book)})
