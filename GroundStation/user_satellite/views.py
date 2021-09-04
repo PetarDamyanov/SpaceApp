@@ -22,7 +22,7 @@ class UserRegister(ModelForm):
         widgets = {'password': forms.PasswordInput()}
         fields = ['username', 'password']
         def get_get_success_url(self, **kwargs):
-            return reverse_lazy('login')
+            return reverse_lazy(' ')
 
 def register(request):
     form = UserRegister(request.POST or None)
@@ -30,6 +30,7 @@ def register(request):
         salt = create_salt()
         user = User(username=form.data['username'],password=hash_password(form.data["password"],salt),salt=salt)
         user.save()
+        return redirect('login')
     context = {
         'form':form
     }
@@ -44,10 +45,12 @@ def login(request):
             try:
                 # check if password is correct
                hash_password(form.data['password'], user.getSalt()) == user.getPass()
+            #    return render(request,"user_satellite/list.html")
             except:
                 return HttpResponse(f"Wrong password")
             request.session['id'] = user.id
             request.session['username']=user.username
+            return redirect('list')
             # next line was for fixing salt and pass hashing
             # return HttpResponse(f"{user}")
             # the next line was used for testing and fixing the session
@@ -62,7 +65,7 @@ def login(request):
 def logout(request):
     del request.session["username"]
     del request.session["id"]
-    return redirect("/user_satellite/login")
+    return redirect("login")
 
 #=========================================================================
 #                                   Satellite
@@ -70,6 +73,7 @@ class AddSatellite(ModelForm):
     class Meta:
         model = Satellite
         fields = ['norad_id', 'frequency','protocol']
+        
 
 def index(request):
     return HttpResponse("Hello, world. You're at the satellite .")
@@ -85,10 +89,11 @@ def add(request):
         sat = Satellite.objects.get(norad_id=form.data['norad_id'])
         user_satellite = User_satellite(users_id=User.objects.get(id=request.session.get('id')),satellite_id=sat)
         user_satellite.save()
+        return redirect('list')
     context = {
         'form':form, 'username': request.session.get('username')
     }
-    return render(request,"satellite/register.html", context)
+    return render(request,"satellite/add.html", context)
 
 @login_required
 def list(request):

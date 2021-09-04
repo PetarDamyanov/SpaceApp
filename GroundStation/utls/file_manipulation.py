@@ -23,3 +23,6 @@ def read_file(file):
 
 def check_file(file):
     return os.path.exists(file)
+
+def delete_file(file):
+    os.remove(file)

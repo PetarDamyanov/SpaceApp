@@ -12,6 +12,8 @@ from utls.file_manipulation import *
 def index(request):
     return HttpResponse("Hello, world. You're at the satellite .")
 
+holdFile = ''
+
 @login_required
 def book(request):
     class BookingForm(forms.Form):
@@ -25,11 +27,14 @@ def book(request):
         book = Booking(user_id=User.objects.get(id=request.session.get('id')),satellite_id=Satellite.objects.get(norad_id=sat.satellite_id) ,begin=form.data["start_time"],end=form.data["end_time"])
         book.save()
         bookToJson=serializers.serialize("json",Booking.objects.filter(id=book.id).all())
-        fName = f"API/{book.id}_{sat.satellite_id}_out"
+        fName = f"API/{book.id}_{sat.satellite_id}_out.json"
         try:
             create_file(fName)
-        except FileExistsError:
             write_file(fName,bookToJson)
+            holdFile = fName
+        except FileExistsError:
+           write_file(fName,bookToJson)
+            
     context = {
         'form':form, 'username': request.session.get('username')
     }
@@ -47,3 +52,12 @@ def listData(request):
     books = Booking.objects.filter(user_id=user).all()
     # return HttpResponse(Data.objects.filter(booking_id__in= books).all())
     return render(request, 'data/list.html', {'username':request.session.get("username"),'datas': Data.objects.filter(booking_id__in= books).all()})
+
+def addData(request):
+    fIn=holdFile[:-3:]
+    fIn = f"{fIn}in"
+    # while(check_file(fIn)):
+        #read file and add to data
+        # data = Data(user_id = read userid form file, booking_id = read from file, ...)
+    delete_file(fIn)
+    delete_file(holdFile)

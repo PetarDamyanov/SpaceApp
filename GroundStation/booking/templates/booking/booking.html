@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base_book.html' %}
 {% block content %}
 <h1>Booking</h1>
+<a href="/list">List</a>
 <form method="POST">
     {% csrf_token %}
 {{ form.as_p }}

@@ -6,5 +6,5 @@ def login_required(method):
         if request.session.get("username"):
             return method(request ,*args, **kwargs)
         else:
-            return redirect("/user_satellite/login")
+            return redirect("login")
     return inner_method

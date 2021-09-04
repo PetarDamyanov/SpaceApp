@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.fields.related import ForeignKey
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
@@ -19,7 +19,7 @@ class User(models.Model):
 
 class Satellite(models.Model):
     norad_id = models.CharField(max_length=250, primary_key=True)
-    frequency = models.FloatField()
+    frequency = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1000.0)],)
     protocol = models.CharField(max_length=250)
     status = models.CharField(max_length=250 ,default="active", choices=[('on', "active"),('off', "dead")])
     registered = models.DateField(auto_now=True)
