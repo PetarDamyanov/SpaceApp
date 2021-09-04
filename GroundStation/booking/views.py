@@ -61,3 +61,7 @@ def addData(request):
         # data = Data(user_id = read userid form file, booking_id = read from file, ...)
     delete_file(fIn)
     delete_file(holdFile)
+
+@login_required
+def dataView(request, data_id):
+    return render(request, 'data/data.html', {'username':request.session.get("username"),'data': Data.objects.get(booking_id=data_id)})
