@@ -25,7 +25,7 @@ def book(request):
         book = Booking(user_id=User.objects.get(id=request.session.get('id')),satellite_id=Satellite.objects.get(norad_id=sat.satellite_id) ,begin=form.data["start_time"],end=form.data["end_time"])
         book.save()
         bookToJson=serializers.serialize("json",Booking.objects.filter(id=book.id).all())
-        fName = f"{book.id}_{sat.satellite_id}"
+        fName = f"API/{book.id}_{sat.satellite_id}_out"
         try:
             create_file(fName)
         except FileExistsError:

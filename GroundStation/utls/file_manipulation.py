@@ -1,7 +1,10 @@
-def create_file(name):
+import os
+
+
+def create_file(file):
     try:
-        f = open("name", "x")
-        return name
+        f = open(file, "x")
+        return file
     except:
         raise FileExistsError
 
@@ -17,3 +20,6 @@ def read_file(file):
     info = f.read()
     f.close
     return info
+
+def check_file(file):
+    return os.path.exists(file)
