@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Register</h1>
-<form method="POST">
-        {% csrf_token %}
-    
-    <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Username</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name="username">
-      </div>
-      <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">Password</label>
-        <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="password">
-      </div>
-    <input type="submit" value="Save"/>
-</form>
+{% load static %}
+<section class="d-flex justify-content-center m-5">
+    <div class="card shadow" style="width:80vh;">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="w-100 overflow-hidden position-relative">
+                <img src="{% static 'images/space_challenges_planet.jpg' %}" class="card-img-top img-fluid" alt="...">
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your name" name="username"  required>
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Your password" name="password" required>
+                </div>
+                <div class="row">   
+                    <div class="col"></div>
+                    <div class="col align-self-end d-flex justify-content-end">
+                        <button class="btn border color-3 text-light" value="Save">Register</button>
+                    </div>
+                    <!-- <input type="submit" value="Login"/> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

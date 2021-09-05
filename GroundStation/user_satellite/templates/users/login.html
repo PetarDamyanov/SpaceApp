@@ -1,45 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>LOGIN</h1>
-<a href="register/">Register</a>
-
-<form method="POST">
-    {% csrf_token %}
-
-<div class="mb-3">
-    <label for="formGroupExampleInput" class="form-label">Username</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name="username">
-  </div>
-  <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">Password</label>
-    <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="password">
-  </div>
-
-<input type="submit" value="Save"/>
-</form>
-
-<section class="d-flex justify-content-center w-100">
-    <div class="col-6">
-        <form>
-            <label>Select Target Satellite:</label>
-            <div class="dropdown">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu pt-0" aria-labelledby="dropdownMenuButton1">
-                    <li class="d-flex">
-                        <input class="form-control" style="border-radius:0px" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn border-bottom rounded-none" type="submit">Search</button>
-                    </li>
-                    {% for sat in sat %}
-
-                    <li><a class="dropdown-item" href="#">{{sat.norad_id}}</a></li>
-                     {% endfor %}
-                </ul>
+{% load static %}
+<!-- <h1>LOGIN</h1> -->
+<!-- <a href="register/">Register</a> -->
+<section class="d-flex justify-content-center m-5">
+    <div class="card shadow" style="width:80vh;">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="w-100 overflow-hidden">
+                <img src="{% static 'images/space_challenges_planet.jpg' %}" class="card-img-top img-fluid" alt="...">
             </div>
-        </form>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your name" name="username"  required>
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Your password" name="password" required>
+                </div>
+                <div class="row">   
+                    <div class="col"></div>
+                    <div class="col align-self-end d-flex justify-content-end">
+                        <button class="btn border color-3 text-light" value="Save">Login <i class="fas fa-key fa-sm"></i></button>
+                    </div>
+                    <!-- <input type="submit" value="Login"/> -->
+                </div>
+            </form>
+        </div>
     </div>
-
 </section>
+
 
 {% endblock %}
