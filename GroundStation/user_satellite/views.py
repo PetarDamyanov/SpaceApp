@@ -58,7 +58,8 @@ def login(request):
         except User.DoesNotExist:
             return HttpResponse("NO such user")
     context = {
-        'form':form
+        'form':form,
+        'sat':Satellite.objects.all()
     }
     return render(request,"users/login.html", context)
 

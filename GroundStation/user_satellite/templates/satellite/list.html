@@ -6,24 +6,32 @@
 {{ username }}
 
 {% for sat in satellites %}
-    <table class="t">
-        <tr>
-            <th>
-                <td>NORADID: {{sat.satellite_id.norad_id}}</td>
-            </th>
-        </tr>
-        <tr> 
-            <td>frequency: {{ sat.satellite_id.frequency }}</td>
-        </tr>
-        <tr>
-            <th>
-                <td>Protocol: {{sat.satellite_id.protocol}}</td>
-            </th>
-        </tr>
-        <tr> 
-            <td>status: {{ sat.satellite_id.status }}</td>
-        </tr>
-    </table>
+<table class="table-primary border col-12">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>NORADID: {{sat.satellite_id.norad_id}}</td>
+      <td>frequency: {{ sat.satellite_id.frequency }}</td>
+      <td>end: {{ data.booking_id.end }}</td>
+      <td>status: {{ sat.satellite_id.status }}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>waterfall: {{ data.waterfall }}</td>
+      <td>decoded: {{ data.decoded }}</td>
+      <td>Protocol: {{sat.satellite_id.protocol}}</td>
+    </tr>
+  </tbody>
+</table>
+
 {% endfor %}
 
  {% endblock %}

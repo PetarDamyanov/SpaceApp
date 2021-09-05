@@ -14,7 +14,3 @@
 .rounded-none {
 	border-radius: 0px !important;
 }
-
-body{
-    background: white url("images/test_bg.jpg") no-repeat;
-}
