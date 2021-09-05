@@ -2,9 +2,19 @@
 {% block content %}
 <h1>LOGIN</h1>
 <a href="register/">Register</a>
+
 <form method="POST">
     {% csrf_token %}
-{{ form.as_p }}
+
+<div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Username</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name="username">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">Password</label>
+    <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="password">
+  </div>
+
 <input type="submit" value="Save"/>
 </form>
 

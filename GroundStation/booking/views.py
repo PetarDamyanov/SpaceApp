@@ -53,6 +53,13 @@ def listData(request):
     # return HttpResponse(Data.objects.filter(booking_id__in= books).all())
     return render(request, 'data/list.html', {'username':request.session.get("username"),'datas': Data.objects.filter(booking_id__in= books).all()})
 
+@login_required
+def dataView(request):
+    user = get_object_or_404(User, id=request.session.get('id'))
+    books = Booking.objects.filter(user_id=user).first()
+    # return HttpResponse(Data.objects.get(booking_id=book.id))
+    return render(request, 'data/data.html', {'username':request.session.get("username"),'data': Data.objects.get(booking_id=books)})
+
 def addData(request):
     fIn=holdFile[:-3:]
     fIn = f"{fIn}in"
@@ -61,10 +68,3 @@ def addData(request):
         # data = Data(user_id = read userid form file, booking_id = read from file, ...)
     delete_file(fIn)
     delete_file(holdFile)
-
-@login_required
-def dataView(request):
-    user = get_object_or_404(User, id=request.session.get('id'))
-    # return HttpResponse(user)
-    books = Booking.objects.filter(user_id=user).first()
-    return render(request, 'data/data.html', {'username':request.session.get("username"),'data': Data.objects.get(booking_id=book)})
