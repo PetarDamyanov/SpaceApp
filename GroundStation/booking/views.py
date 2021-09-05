@@ -1,3 +1,4 @@
+from os import stat
 from user_satellite.views import satellite
 from django.http import HttpResponse, request
 from .models import Booking, Data
@@ -36,8 +37,9 @@ def book(request):
            write_file(fName,bookToJson)
             
     context = {
-        'form':form, 'username': request.session.get('username')
-    }
+        'form':form, 'username': request.session.get('username'),
+         'satellite':User_satellite.objects.filter(users_id=request.session.get('id')).all()
+            }
     return render(request,"booking/booking.html", context)
 
 @login_required
