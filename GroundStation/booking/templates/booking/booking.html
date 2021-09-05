@@ -4,7 +4,21 @@
 <a href="./list ">List</a>
 <form method="POST">
     {% csrf_token %}
-{{ form.as_p }}
+<div class="mb-3">
+    <select class="form-select" aria-label="Default select example" name="satellite">
+        {% for sat in satellite %}
+        <option value="{{ sat.norad_id }}">{{sat.norad_id}}</option>
+        {% endfor %}
+    </select></div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">start_time</label>
+    <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="start_time">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">end_time</label>
+    <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="end_time">
+  </div>
+
 <input type="submit" value="Save"/>
 </form>
 

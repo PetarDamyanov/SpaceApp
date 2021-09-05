@@ -1,0 +1,1 @@
+[{"model": "booking.booking", "pk": 30, "fields": {"user_id": 1, "satellite_id": "gosho", "begin": "2021-09-06T19:40:00Z", "end": "2021-09-15T19:40:00Z"}}]

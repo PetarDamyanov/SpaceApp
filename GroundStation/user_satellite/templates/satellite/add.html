@@ -6,7 +6,18 @@
 <a href="logout/">logout</a>
 <form method="POST">
     {% csrf_token %}
-{{ form.as_p }}
+<div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">norad_id</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name="norad_id">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">frequency</label>
+    <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="frequency">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">protocol</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="protocol">
+  </div>
 <input type="submit" value="Save"/>
 </form>
 
