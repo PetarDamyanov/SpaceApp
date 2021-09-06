@@ -27,10 +27,14 @@ class UserRegister(ModelForm):
 def register(request):
     form = UserRegister(request.POST or None)
     if form.is_valid():
-        salt = create_salt()
-        user = User(username=form.data['username'],password=hash_password(form.data["password"],salt),salt=salt)
-        user.save()
-        return redirect('login')
+        try:
+            User.objects.get(username=form.data['username'])
+            return HttpResponse("User is taken")
+        except:
+            salt = create_salt()
+            user = User(username=form.data['username'],password=hash_password(form.data["password"],salt),salt=salt)
+            user.save()
+            return redirect('login')
     context = {
         'form':form
     }
