@@ -37,8 +37,9 @@
     </a>
     <div class="d-flex"> 
       {% if username != null %}
-      <a class="nav-link active text-dark border-end" aria-current="page" href="add">Add Satellite</a>
-      <a class="nav-link active text-dark border-end" aria-current="page" href="booking">Booking</a>
+      <a class="nav-link active text-dark border-end" aria-current="page" href="/add">Add Satellite</a>
+      <a class="nav-link active text-dark border-end" aria-current="page" href="/booking">Booking</a>
+      <a class="nav-link active text-dark border-end" aria-current="page" href="/list">Satellites</a>
       <a class="nav-link active text-dark" aria-current="page" href="/logout"><i class="fas fa-sign-out-alt fa-lg"></i></a>
       {% else %}
       <a class="nav-link active text-dark border-end" aria-current="page" href="/">Login <i class="fas fa-key fa-sm"></i></a>
@@ -52,9 +53,15 @@
 
 <body>
 
-<h1>You are at base</h1>
+<!-- <h1>You are at base</h1>
 <a href="./">booking</a>
-<a href="./data">data</a>
-<a href="./listData">LISt data</a>
-<a href="../add">Add Sat</a>
+-->
+<div class="w-100 d-flex justify-content-end p-2">
+  <a href="./data" class="text-secondary text-center">Data</a>
+  &nbsp;
+  <a href="./listData" class="text-secondary text-center">List Data</a>
+  
+</div>
+
+<!-- <a href="../add">Add Sat</a> -->
 {% block content %} {% endblock %}

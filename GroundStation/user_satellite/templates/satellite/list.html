@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<a href="add">add</a>
+<!-- <a href="add">add</a>
 <a href="booking/">Booking</a>
 <a href="logout/">logout</a>
 {{ username }}
+-->
+<h1 class="text-center my-4">List of Satellites <i class="fas fa-satellite"></i></h1>
 
 <table class="table table-striped table-hover border col-12">
   <thead>
@@ -16,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-{% for sat in satellites %}
+    {% for sat in satellites %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>{{sat.satellite_id.norad_id}}</td>
@@ -24,9 +26,9 @@
       <td>{{ sat.satellite_id.frequency }}</td>
       <td>{{ sat.satellite_id.status }}</td>
     </tr>
-{% endfor %}
+    {% endfor %}
   </tbody>
 </table>
 
 
- {% endblock %}
+{% endblock %}

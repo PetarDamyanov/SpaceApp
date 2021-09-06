@@ -27,9 +27,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ground Station Squad</title>
+
 </head>
 
-<nav class="navbar navbar-light bg-light shadow-sm">
+<nav class="navbar navbar-light bg-light shadow-sm position-fixed w-100 py-2 m-0 top-0">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="{% static 'images/space_challenges_logo.png' %}" alt="logo" width="30" class="d-inline-block align-text-top m-auto p-auto">
@@ -37,8 +38,9 @@
     </a>
     <div class="d-flex"> 
       {% if username != null %}
-      <a class="nav-link active text-dark border-end" aria-current="page" href="add">Add Satellite</a>
-      <a class="nav-link active text-dark border-end" aria-current="page" href="booking">Booking</a>
+      <a class="nav-link active text-dark border-end" aria-current="page" href="/add">Add Satellite</a>
+      <a class="nav-link active text-dark border-end" aria-current="page" href="/booking">Booking</a>
+      <a class="nav-link active text-dark border-end" aria-current="page" href="/list">Satellites</a>
       <a class="nav-link active text-dark" aria-current="page" href="/logout"><i class="fas fa-sign-out-alt fa-lg"></i></a>
       {% else %}
       <a class="nav-link active text-dark border-end" aria-current="page" href="/">Login <i class="fas fa-key fa-sm"></i></a>
@@ -47,6 +49,7 @@
     </div>
   </div>
 </nav>
+<div class="my-4">&nbsp;</div>
 
 <!-- <h1>You are at base</h1> -->
 
