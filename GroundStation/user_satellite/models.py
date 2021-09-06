@@ -19,9 +19,16 @@ class User(models.Model):
 
 class Satellite(models.Model):
     norad_id = models.CharField(max_length=250, primary_key=True)
+    name = models.CharField(max_length=250, default = '')
     frequency = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1000.0)],)
     protocol = models.CharField(max_length=250)
-    status = models.CharField(max_length=250 ,default="active", choices=[('on', "active"),('off', "dead")])
+    sma = models.FloatField(validators=[MinValueValidator(-100000.0), MaxValueValidator(100000.0)],default=0)
+    inc = models.FloatField(validators=[MinValueValidator(-100000.0), MaxValueValidator(100000.0)],default=0)
+    raan = models.FloatField(validators=[MinValueValidator(-100000.0), MaxValueValidator(100000.0)],default=0)
+    aop = models.FloatField(validators=[MinValueValidator(-100000.0), MaxValueValidator(100000.0)],default=0)
+    ecc = models.FloatField(validators=[MinValueValidator(-100000.0), MaxValueValidator(100000.0)],default=0)
+    ta = models.FloatField(validators=[MinValueValidator(-100000.0), MaxValueValidator(100000.0)],default=0)
+    status = models.CharField(max_length=250,default="active", choices=[('on', "active"),('off', "dead")])
     registered = models.DateField(auto_now=True)
 
     def getNorad(self):

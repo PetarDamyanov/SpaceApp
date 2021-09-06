@@ -5,20 +5,48 @@
 <a href="list">list</a>
 <a href="logout/">logout</a>
 <form method="POST">
-    {% csrf_token %}
-<div class="mb-3">
-    <label for="formGroupExampleInput" class="form-label">norad_id</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder" name="norad_id">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">NORAD ID</label>
+    <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="Input here" name="norad_id">
   </div>
   <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">frequency</label>
-    <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="frequency">
+    <label for="formGroupExampleInput" class="form-label">Name</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Input here" name="name">
   </div>
   <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">protocol</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="protocol">
+    <label for="formGroupExampleInput" class="form-label">Frequency</label>
+    <input type="number" class="form-control" id="formGroupExampleInput3" placeholder="Input here" name="frequency">
   </div>
-<input type="submit" value="Save"/>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Protocol</label>
+    <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Input here" name="protocol">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Semi-major axis (SMA)</label>
+    <input type="number" class="form-control" id="formGroupExampleInput5" placeholder="Input here" name="sma">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Inclination (INC)</label>
+    <input type="number" class="form-control" id="formGroupExampleInput6" placeholder="Input here" name="inc">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Right ascension of ascending node (RAAN)</label>
+    <input type="number" class="form-control" id="formGroupExampleInput7" placeholder="Input here" name="raan">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Argument of perispsis (AOP)</label>
+    <input type="number" class="form-control" id="formGroupExampleInput8" placeholder="Input here" name="aop">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">Eccentricity (ECC)</label>
+    <input type="number" class="form-control" id="formGroupExampleInput9" placeholder="Input here" name="ecc">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">True anomaly (TA)</label>
+    <input type="number" class="form-control" id="formGroupExampleInput10" placeholder="Input here" name="ta">
+  </div>
+  <input type="submit" value="Save"/>
 </form>
 
 {% endblock %}

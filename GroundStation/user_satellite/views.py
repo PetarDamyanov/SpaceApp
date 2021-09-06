@@ -73,7 +73,7 @@ def logout(request):
 class AddSatellite(ModelForm):
     class Meta:
         model = Satellite
-        fields = ['norad_id', 'frequency','protocol']
+        fields = ['norad_id','name','frequency','protocol','sma','inc','raan','aop','ecc','ta']
         
 
 def index(request):
