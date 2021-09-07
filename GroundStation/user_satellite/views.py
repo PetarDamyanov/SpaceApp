@@ -47,15 +47,12 @@ def login(request):
         try:
             # check if user is in db
             user = User.objects.get(username=form.data['username'])
-            try:
-                # check if password is correct
-               hash_password(form.data['password'], user.getSalt()) == user.getPass()
-            #    return render(request,"user_satellite/list.html")
-            except:
+            if hash_password(form.data['password'], user.getSalt()) == user.getPass():
+                request.session['id'] = user.id
+                request.session['username']=user.username
+                return redirect('list')    
+            else:
                 return HttpResponse(f"Wrong password")
-            request.session['id'] = user.id
-            request.session['username']=user.username
-            return redirect('list')
             # next line was for fixing salt and pass hashing
             # return HttpResponse(f"{user}")
             # the next line was used for testing and fixing the session
