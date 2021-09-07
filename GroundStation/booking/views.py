@@ -9,6 +9,8 @@ from utls.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from django.core import serializers
 from utls.file_manipulation import *
+import json
+import time
 
 def index(request):
     return HttpResponse("Hello, world. You're at the satellite .")
@@ -18,23 +20,24 @@ holdFile = ''
 @login_required
 def book(request):
     class BookingForm(forms.Form):
-        satellite = forms.ModelMultipleChoiceField(queryset=User_satellite.objects.filter(users_id=request.session.get('id')).all()) #User_satellite.objects.filter(users_id=request.session.get('id')).all().values_list('satellite_id')
+        sat_id = forms.CharField(widget=forms.TextInput(attrs={'class': 'special'})) #User_satellite.objects.filter(users_id=request.session.get('id')).all().values_list('satellite_id')
         start_time = forms.DateTimeField(widget=forms.widgets.DateTimeInput(attrs={'type': 'datetime-local'}))
         end_time = forms.DateTimeField(widget=forms.widgets.DateTimeInput(attrs={'type': 'datetime-local'}))
 
     form = BookingForm(request.POST or None)
     if form.is_valid():
-        sat=User_satellite.objects.get(id=form.data['satellite'])
-        book = Booking(user_id=User.objects.get(id=request.session.get('id')),satellite_id=Satellite.objects.get(norad_id=sat.satellite_id) ,begin=form.data["start_time"],end=form.data["end_time"])
-        book.save()
-        bookToJson=serializers.serialize("json",Booking.objects.filter(id=book.id).all())
-        fName = f"API/{book.id}_{sat.satellite_id}_out.json"
+        # sat=User_satellite.objects.get(id=form.data['satellite'])
+        # book = Booking(user_id=User.objects.get(id=request.session.get('id')),satellite_id=Satellite.objects.get(norad_id=sat.satellite_id) ,begin=form.data["start_time"],end=form.data["end_time"])
+        # book.save()
+        fields={'norad_id':form['sat_id'].value(),'start_time':form['start_time'].value(),'end_time':form['end_time'].value()}
+        bookToJson=json.dumps(fields)
+        fName = f"API/{fields['norad_id']}_{time.time()}_out.json"
         try:
             create_file(fName)
             write_file(fName,bookToJson)
             holdFile = fName
         except FileExistsError:
-           write_file(fName,bookToJson)
+            write_file(fName,bookToJson)
             
     context = {
         'form':form, 'username': request.session.get('username'),
