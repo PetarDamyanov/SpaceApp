@@ -1,6 +1,6 @@
 {% extends 'base_book.html' %}
 {% block content %} 
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <form method="POST" class="d-flex justify-content-center">
 
   <div class="col-6">
@@ -14,8 +14,9 @@
             <div class="dropdown d-inline d-flex w-100 mb-3">
                 <div class="w-100 d-flex">
                     <button class="btn border dropdown-toggle flex-fill text-start" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
+                        Select Satellite
                     </button>
+            <input type="datetime-local" class="form-control d-none" id="sat-name" placeholder="Another input placeholder" name="satellite">
 
 
                     <a href="/list" class="btn color-2 text-light"><i class="fas fa-list"></i></a>
@@ -25,35 +26,34 @@
                             <button class="btn border-bottom rounded-none" type="submit">Search</button>
                         </li>
                         {% for sat in satellite %}
-                        <li><a class="dropdown-item" href="#">{{sat.satellite_id.name}}</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#" onclick="name = $(this).find('.target-name').text();id = $(this).find('.target-id').text();dropdown = $(this).closest('.dropdown').find('.dropdown-toggle'); dropdown.text(name);$('#sat-name').val(id)">
+                                <span class="target-id">{{sat.satellite_id.norad_id}}</span>
+                                &nbsp;|&nbsp;
+                                <span class="target-name">{{sat.satellite_id.name}}</span>
+                            </a>
+                        </li>
                         {% endfor %}
 
                     </ul>
                 </div>
-<!--             <select class="form-select " aria-label="Default select example" name="satellite" class="d-inline">
-                {% for sat in satellite %}
-                <option value="{{ sat.satellite_id.norad_id }}">{{sat.satellite_id.name}}</option>
-                {% endfor %}
-            </select>
-        -->  
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label"><b>Starting Time</b></label>
+            <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="start_time">
+        </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label"><b>Ending Time</b></label>
+            <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="end_time">
+        </div>
 
+        <div class="row">
+          <div class="col"></div>
+          <div class="col align-self-end d-flex justify-content-end">
+            <button class="btn border color-2 text-light" value="Save">Save</button>
+        </div>
     </div>
-</div>
-<div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label"><b>Starting Time</b></label>
-    <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="start_time">
-</div>
-<div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label"><b>Ending Time</b></label>
-    <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="end_time">
-</div>
-
-<div class="row">
-  <div class="col"></div>
-  <div class="col align-self-end d-flex justify-content-end">
-    <button class="btn border color-2 text-light" value="Save">Save</button>
-</div>
-</div>
 </div>
 </form>
 

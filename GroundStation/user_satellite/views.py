@@ -10,6 +10,7 @@ import datetime
 from utls.salt import create_salt
 from utls.hash_pass import hash_password
 from utls.decorators import login_required
+from django.contrib import messages
 
 def index(request):
     return HttpResponse("Hello, world. You're at the satellite - user .")
@@ -26,8 +27,9 @@ class UserRegister(ModelForm):
 
 def register(request):
     form = UserRegister(request.POST or None)
-    if form.is_valid():
+    if form.is_valid() and form.data['password'] == form.data['password-repeat']:
         salt = create_salt()
+
         user = User(username=form.data['username'],password=hash_password(form.data["password"],salt),salt=salt)
         user.save()
         return redirect('login')

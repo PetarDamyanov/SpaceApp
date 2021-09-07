@@ -7,6 +7,11 @@
             {% csrf_token %}
             <div class="w-100 overflow-hidden position-relative">
                 <img src="{% static 'images/space_challenges_planet.jpg' %}" class="card-img-top img-fluid" alt="...">
+                <div class="position-absolute translate-middle start-50" style="top:48.5%">
+                    <span style="font-size: 10vmin" class="position-relative">
+                        &nbsp;<i class="fas fa-satellite-dish fa-lg"></i>
+                    </span>
+                </div>
             </div>
             <div class="card-body">
                 <div class="mb-3">
@@ -16,6 +21,10 @@
                 <div class="mb-3">
                     <label for="formGroupExampleInput2" class="form-label">Password</label>
                     <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Your password" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Repeat Password</label>
+                    <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Your password" name="password-repeat" required>
                 </div>
                 <div class="row">   
                     <div class="col"></div>

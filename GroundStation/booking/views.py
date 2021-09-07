@@ -59,8 +59,8 @@ def listData(request):
 def dataView(request):
     user = get_object_or_404(User, id=request.session.get('id'))
     books = Booking.objects.filter(user_id=user).first()
-    # return HttpResponse(Data.objects.filter(booking_id=books).first())
-    return render(request, 'data/data.html', {'username':request.session.get("username"),'data': Data.objects.filter(booking_id=books).first()})
+    # return HttpResponse(Data.objects.get(booking_id=book.id))
+    return render(request, 'data/data.html', {'username':request.session.get("username"),'data': Data.objects.get(booking_id=books)})
 
 def addData(request):
     fIn=holdFile[:-3:]
