@@ -38,6 +38,12 @@ def book(request):
             holdFile = fName
         except FileExistsError:
             write_file(fName,bookToJson)
+
+        sat = Satellite.objects.get(norad_id=fields['norad_id'])
+        user_satellite = User_satellite(users_id=User.objects.get(id=request.session.get('id')),satellite_id=sat)
+        user_satellite.save()
+
+        return HttpResponse('Observation booked successfully!')
             
     context = {
         'form':form, 'username': request.session.get('username'),
