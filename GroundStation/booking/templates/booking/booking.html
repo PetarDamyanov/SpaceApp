@@ -1,5 +1,6 @@
 {% extends 'base_book.html' %}
 {% block content %} 
+{% load dropdown_passes %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <form method="POST" class="d-flex justify-content-center">
 
@@ -16,7 +17,7 @@
                     <button class="btn border dropdown-toggle flex-fill text-start" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         Select Satellite
                     </button>
-            <input type="text" class="form-control d-none" id="sat-name" placeholder="Another input placeholder" name="sat_id">
+                    <input type="text" class="form-control d-none" id="sat-name" placeholder="Another input placeholder" name="sat_id">
 
 
                     <a href="/list" class="btn color-2 text-light"><i class="fas fa-list"></i></a>
@@ -39,21 +40,32 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label"><b>Starting Time</b></label>
-            <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="start_time">
-        </div>
-        <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label"><b>Ending Time</b></label>
-            <input type="datetime-local" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="end_time">
-        </div>
-
-        <div class="row">
-          <div class="col"></div>
-          <div class="col align-self-end d-flex justify-content-end">
-            <button class="btn border color-2 text-light" value="Save">Save</button>
+        <div class="mb-3 w-100 text-start">
+            <label for="formGroupExampleInput2" class="form-label d-block"><b>Starting Time</b></label>
+            <!-- Example single danger button -->
+            <div class="btn-group w-100">
+              <button type="button" class="btn border dropdown-toggle d-block w-100 text-start" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Pass
+            </button>
+            <ul class="dropdown-menu overflow-scroll" style="max-height: 70vh;">
+                {% get_next_passes_info "QMR-kWT" as passes %}
+                {% for p in passes %}
+                <li><a class="dropdown-item" href="#"><b>Date: </b>{{p.0}}</a></li>
+                <li><a class="dropdown-item" href="#"><b>Rising time: </b>{{p.1}}</a></li>
+                <li><a class="dropdown-item" href="#"><b>Setting time: </b>{{p.2}}</a></li>
+                <li><a class="dropdown-item" href="#"><b>Maximum elevation: </b>{{p.3}}</a></li>
+                <li><hr class="dropdown-divider"></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col align-self-end d-flex justify-content-end">
+        <button class="btn border color-2 text-light" value="Save">Save</button>
+    </div>
+</div>
 </div>
 </form>
 

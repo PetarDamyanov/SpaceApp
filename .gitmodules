@@ -1,0 +1,3 @@
+[submodule "GroundStation/API/DEV"]
+	path = GroundStation/API/DEV
+	url = https://github.com/vkabadzhova/SpaceChallenges2021-GroundStation
